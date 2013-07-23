@@ -64,7 +64,11 @@ module ActionControllerAdditions
                                                        data: { page_title: page_title,
                                                                flashes: flashes.to_json,
                                                                container: args[:ajaxify_container] } )
-          response.body = response_body[0]
+
+          if response.status != 406
+            response.body = response_body[0]
+          end
+
           ajaxify_set_asset_digest_header
 
           return
